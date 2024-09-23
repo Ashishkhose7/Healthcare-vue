@@ -5,10 +5,10 @@ import PatientList from './components/PatientList.vue';
 import PatientInfo from './components/PatientInfo.vue';
 import LabResult from './components/LabResult.vue';
 import DiagnosticHistory from './components/DiagnosticHistory.vue';
-import { onMounted } from 'vue';
+import ProgressSpinner from 'primevue/progressspinner';
+import { computed, onMounted } from 'vue';
 
 const userStore = userDataStore();
-
 onMounted(async () => {
   
   let username = 'coalition';
@@ -39,12 +39,22 @@ onMounted(async () => {
     }
 })
 
+const overlay = computed(()=>{
+    return userStore.getloadingStatus;
+})
+
 
 </script>
 
 <template>
   <main class="px-2 py-2">
-      <Header/>
+    <v-overlay v-model="overlay" class="text-center m-auto flex justify-center items-center">
+        <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="6" fill="transparent"
+        animationDuration=".5s"/>
+    </v-overlay>
+
+    <Header/>
+
       <section>
         <div class="main-content">
             <div class="patient-list">
