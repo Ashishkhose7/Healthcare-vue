@@ -24,3 +24,4 @@ app.use(PrimeVue, { theme: {
 app.use(vuetify)
 
 app.mount('#app')
+
